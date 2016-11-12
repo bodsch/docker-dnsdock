@@ -5,7 +5,7 @@ MAINTAINER Bodo Schulz <bodo@boone-schulz.de>
 
 LABEL version="1.0.0"
 
-EXPOSE 53 53/udp
+EXPOSE 53 53/udp 80
 
 ENV GOPATH=/opt/go
 ENV GO15VENDOREXPERIMENT=0
@@ -17,6 +17,7 @@ RUN \
   apk --quiet --no-cache upgrade && \
   apk --quiet --no-cache add \
     build-base \
+    drill \
     go \
     git && \
   export PATH="${PATH}:${GOPATH}/bin" && \
@@ -29,16 +30,20 @@ RUN \
   apk del --purge \
     build-base \
     go \
-    git && \
+    git \
+    bash \
+    nano \
+    tree \
+    curl \
+    ca-certificates \
+    supervisor && \
   rm -rf \
     ${GOPATH} \
     /tmp/* \
     /var/cache/apk/*
 
-#COPY rootfs/ /
+ENTRYPOINT [ "/usr/bin/dnsdock" ]
 
-#CMD /opt/startup.sh
-
-CMD /bin/bash
+CMD [ "--nameserver='8.8.8.8:53'", "--verbose" ]
 
 # ---------------------------------------------------------------------------------------

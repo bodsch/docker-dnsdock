@@ -2,8 +2,6 @@
 CONTAINER  := dnsdock
 IMAGE_NAME := docker-dnsdock
 
-DATA_DIR   := /tmp/docker-data
-
 build:
 	docker \
 		build \
@@ -16,12 +14,10 @@ run:
 		--detach \
 		--interactive \
 		--tty \
-    --publish=2003:2003 \
-    --publish=2003:2003/udp \
-    --publish=2004:2004 \
-    --publish=7002:7002 \
-    --publish=7007:7007 \
-    --volume=${DATA_DIR}:/srv \
+		--publish=53:53 \
+		--publish=53:53/udp \
+		--publish=80:80 \
+		--volume=/var/run/docker.sock:/var/run/docker.sock \
 		--hostname=${CONTAINER} \
 		--name=${CONTAINER} \
 		$(IMAGE_NAME)
@@ -32,16 +28,13 @@ shell:
 		--rm \
 		--interactive \
 		--tty \
-		--publish=2003:2003 \
-		--publish=2003:2003/udp \
-		--publish=2004:2004 \
-		--publish=7002:7002 \
-		--publish=7007:7007 \
-		--volume=${DATA_DIR}:/srv \
+		--publish=53:53 \
+		--publish=53:53/udp \
+		--publish=80:80 \
+		--volume=/var/run/docker.sock:/var/run/docker.sock \
 		--hostname=${CONTAINER} \
 		--name=${CONTAINER} \
-		$(IMAGE_NAME) \
-		/bin/bash
+		$(IMAGE_NAME)
 
 exec:
 	docker exec \

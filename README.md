@@ -1,6 +1,6 @@
 # docker-dnsdock
 
-A Docker container for the DNS service discovery for Docker containers
+A Docker container for the DNS service discovery for Docker containers (https://github.com/aacebedo/dnsdock)
 
 
 # Status
