@@ -31,6 +31,11 @@ History
     make history
 
 
+# Usage
+
+Look at the `Makefile` for Examples. :)
+
+
 # Docker Hub
 
 You can find the Container also at  [DockerHub](https://hub.docker.com/r/bodsch/docker-dnsdock)
@@ -40,10 +45,8 @@ You can find the Container also at  [DockerHub](https://hub.docker.com/r/bodsch/
     docker pull bodsch/docker-dnsdock
 
 
-# supported Environment Vars
-
 # Ports
 
- - 53
- - 53/udp
-
+  - 53
+  - 53/udp
+  - 80

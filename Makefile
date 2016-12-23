@@ -3,14 +3,13 @@ CONTAINER  := dnsdock
 IMAGE_NAME := docker-dnsdock
 
 build:
-	docker \
-		build \
-		--rm --tag=$(IMAGE_NAME) .
+	docker build \
+		--rm \
+		--tag=$(IMAGE_NAME) .
 	@echo Image tag: ${IMAGE_NAME}
 
 run:
-	docker \
-		run \
+	docker run \
 		--detach \
 		--interactive \
 		--tty \
@@ -20,11 +19,11 @@ run:
 		--volume=/var/run/docker.sock:/var/run/docker.sock \
 		--hostname=${CONTAINER} \
 		--name=${CONTAINER} \
-		$(IMAGE_NAME)
+		$(IMAGE_NAME) \
+		--nameserver="141.1.1.1:53" --verbose --http=":80"
 
 shell:
-	docker \
-		run \
+	docker run \
 		--rm \
 		--interactive \
 		--tty \
@@ -34,20 +33,21 @@ shell:
 		--volume=/var/run/docker.sock:/var/run/docker.sock \
 		--hostname=${CONTAINER} \
 		--name=${CONTAINER} \
-		$(IMAGE_NAME)
+		$(IMAGE_NAME) \
+		--nameserver="141.1.1.1:53" --verbose --http=":80"
 
 exec:
 	docker exec \
 		--interactive \
 		--tty \
 		${CONTAINER} \
-		/bin/bash
+		/bin/sh
 
 stop:
-	docker \
-		kill ${CONTAINER}
+	docker kill \
+		${CONTAINER}
 
 history:
-	docker \
-		history ${IMAGE_NAME}
+	docker history \
+		${IMAGE_NAME}
 
