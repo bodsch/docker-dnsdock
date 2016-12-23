@@ -1,9 +1,9 @@
 
-FROM bodsch/docker-alpine-base:1610-02
+FROM bodsch/docker-alpine-base:1612-01
 
 MAINTAINER Bodo Schulz <bodo@boone-schulz.de>
 
-LABEL version="1.0.1"
+LABEL version="1.0.2"
 
 EXPOSE 53 53/udp 80
 
