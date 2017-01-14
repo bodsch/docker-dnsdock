@@ -1,14 +1,15 @@
 
-FROM bodsch/docker-alpine-base:1612-01
+FROM bodsch/docker-alpine-base:1701-02
 
 MAINTAINER Bodo Schulz <bodo@boone-schulz.de>
 
-LABEL version="1.0.2"
+LABEL version="1.1.0"
 
 EXPOSE 53 53/udp 80
 
-ENV GOPATH=/opt/go
-ENV GO15VENDOREXPERIMENT=0
+ENV \
+  GOPATH=/opt/go \
+  GO15VENDOREXPERIMENT=0
 
 # ---------------------------------------------------------------------------------------
 
@@ -28,10 +29,10 @@ RUN \
   cd ${GOPATH}/src/github.com/aacebedo/dnsdock/src && \
   go build -o /usr/bin/dnsdock && \
   apk del --purge \
+    bash \
     build-base \
     go \
     git \
-    bash \
     nano \
     tree \
     curl \
