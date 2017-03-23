@@ -38,8 +38,9 @@ shell:
 		--volume=/var/run/docker.sock:/var/run/docker.sock \
 		--hostname=${CONTAINER} \
 		--name=${CONTAINER} \
+		--entrypoint "" \
 		$(IMAGE_NAME) \
-		--nameserver="141.1.1.1:53" --verbose --http=":80"
+		/bin/sh
 
 exec:
 	docker exec \
