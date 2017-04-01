@@ -1,10 +1,8 @@
-
-FROM golang:1.8-alpine
-#FROM alpine:latest
+FROM bodsch/docker-golang:1.8
 
 MAINTAINER Bodo Schulz <bodo@boone-schulz.de>
 
-LABEL version="1703-03"
+LABEL version="1704-01"
 
 ENV \
   ALPINE_MIRROR="dl-cdn.alpinelinux.org" \
@@ -37,10 +35,10 @@ RUN \
     git && \
   rm -rf \
     ${GOPATH} \
-    /go \
+    /usr/lib/go \
+    /usr/bin/go \
+    /usr/bin/gofmt \
     /tmp/* \
-    /usr/local/go \
-    /usr/local/bin/go-wrapper \
     /var/cache/apk/*
 
 WORKDIR /

@@ -5,30 +5,24 @@ A Docker container for the DNS service discovery for Docker containers (https://
 
 # Status
 
-[![Build Status](https://travis-ci.org/bodsch/docker-dnsdock.svg?branch=master)](https://travis-ci.org/bodsch/docker-dnsdock)
+[![Build Status](https://travis-ci.org/bodsch/docker-dnsdock.svg?branch=1704-01)](https://travis-ci.org/bodsch/docker-dnsdock)
 
 
 # Build
 
 Your can use the included Makefile.
 
-To build the Container:
-    make build
+To build the Container: `make build`
 
-Starts the Container:
-    make run
+Starts the Container: `make run`
 
-Starts the Container with Login Shell:
-    make shell
+Starts the Container with Login Shell: `make shell`
 
-Entering the Container:
-    make exec
+Entering the Container: `make exec`
 
-Stop (but **not kill**):
-    make stop
+Stop (but **not kill**): `make stop`
 
-History
-    make history
+History `make history`
 
 
 # Usage
