@@ -5,7 +5,13 @@ A Docker container for the DNS service discovery for Docker containers (https://
 
 # Status
 
-[![Build Status](https://travis-ci.org/bodsch/docker-dnsdock.svg?branch=1704-01)](https://travis-ci.org/bodsch/docker-dnsdock)
+[![Docker Pulls](https://img.shields.io/docker/pulls/bodsch/docker-dnsdock.svg?branch=1705-01)][hub]
+[![Image Size](https://images.microbadger.com/badges/image/bodsch/docker-dnsdock.svg?branch=1705-01)][microbadger]
+[![Build Status](https://travis-ci.org/bodsch/docker-dnsdock.svg?branch=1705-01)][travis]
+
+[hub]: https://hub.docker.com/r/bodsch/docker-dnsdock/
+[microbadger]: https://microbadger.com/images/bodsch/docker-dnsdock
+[travis]: https://travis-ci.org/bodsch/docker-dnsdock
 
 
 # Build

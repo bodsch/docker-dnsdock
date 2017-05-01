@@ -32,9 +32,6 @@ shell:
 		--rm \
 		--interactive \
 		--tty \
-		--publish=53:53 \
-		--publish=53:53/udp \
-		--publish=80:80 \
 		--volume=/var/run/docker.sock:/var/run/docker.sock \
 		--hostname=${CONTAINER} \
 		--name=${CONTAINER} \
