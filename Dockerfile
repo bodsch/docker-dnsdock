@@ -7,14 +7,14 @@ ENV \
   ALPINE_MIRROR="mirror1.hs-esslingen.de/pub/Mirrors" \
   ALPINE_VERSION="v3.6" \
   TERM=xterm \
-  BUILD_DATE="2017-07-08" \
+  BUILD_DATE="2017-08-29" \
   VERSION="1.16.4" \
   GOPATH=/opt/go
 
 EXPOSE 53 53/udp 80
 
 LABEL \
-  version="1707-27.1" \
+  version="1708-35" \
   org.label-schema.build-date=${BUILD_DATE} \
   org.label-schema.name="dnsdock Docker Image" \
   org.label-schema.description="Inofficial dnsdock Docker Image" \

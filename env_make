@@ -1,0 +1,10 @@
+PORTS = \
+  --publish 53:53 \
+  --publish 53:53/udp \
+  --publish 80:80
+
+VOLUMES = \
+  --volume /var/run/docker.sock:/var/run/docker.sock \
+  --volume /var/log/docker:/var/log
+
+ENV =

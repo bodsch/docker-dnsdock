@@ -1,56 +1,82 @@
 
-CONTAINER  := dnsdock
-IMAGE_NAME := docker-dnsdock
+include env_make
+
+NS       = bodsch
+VERSION ?= latest
+
+REPO     = docker-dnsdock
+NAME     = dnsdock
+INSTANCE = default
+
+.PHONY: build push shell run start stop rm release
+
 
 build:
 	docker build \
 		--rm \
-		--tag=$(IMAGE_NAME) .
-	@echo Image tag: ${IMAGE_NAME}
+		--tag $(NS)/$(REPO):$(VERSION) .
 
 clean:
-	docker \
-		rmi \
-		${IMAGE_NAME}
+	docker rmi \
+		--force \
+		$(NS)/$(REPO):$(VERSION)
 
-run:
-	docker run \
-		--detach \
-		--interactive \
-		--tty \
-		--publish=53:53 \
-		--publish=53:53/udp \
-		--publish=80:80 \
-		--volume=/var/run/docker.sock:/var/run/docker.sock \
-		--hostname=${CONTAINER} \
-		--name=${CONTAINER} \
-		$(IMAGE_NAME) \
-		--nameserver="141.1.1.1:53" --verbose --http=":80"
+history:
+	docker history \
+		$(NS)/$(REPO):$(VERSION)
+
+push:
+	docker push \
+		$(NS)/$(REPO):$(VERSION)
 
 shell:
 	docker run \
 		--rm \
+		--name $(NAME)-$(INSTANCE) \
 		--interactive \
 		--tty \
-		--volume=/var/run/docker.sock:/var/run/docker.sock \
-		--hostname=${CONTAINER} \
-		--name=${CONTAINER} \
 		--entrypoint "" \
-		$(IMAGE_NAME) \
+		$(PORTS) \
+		$(VOLUMES) \
+		$(ENV) \
+		$(NS)/$(REPO):$(VERSION) \
 		/bin/sh
+
+run:
+	docker run \
+		--rm \
+		--name $(NAME)-$(INSTANCE) \
+		$(PORTS) \
+		$(VOLUMES) \
+		$(ENV) \
+		$(NS)/$(REPO):$(VERSION) \
+		--nameserver="141.1.1.1:53" --verbose --http=":80"
 
 exec:
 	docker exec \
 		--interactive \
 		--tty \
-		${CONTAINER} \
+		$(NAME)-$(INSTANCE) \
 		/bin/sh
 
+start:
+	docker run \
+		--detach \
+		--name $(NAME)-$(INSTANCE) \
+		$(PORTS) \
+		$(VOLUMES) \
+		$(ENV) \
+		$(NS)/$(REPO):$(VERSION)
+
 stop:
-	docker kill \
-		${CONTAINER}
+	docker stop \
+		$(NAME)-$(INSTANCE)
 
-history:
-	docker history \
-		${IMAGE_NAME}
+rm:
+	docker rm \
+		$(NAME)-$(INSTANCE)
 
+release: build
+	make push -e VERSION=$(VERSION)
+
+default: build
