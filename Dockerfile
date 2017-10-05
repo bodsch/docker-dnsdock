@@ -8,7 +8,7 @@ ENV \
   ALPINE_VERSION="v3.6" \
   TERM=xterm \
   BUILD_DATE="2017-10-05" \
-  BUILD_TYPE="git" \
+  BUILD_TYPE="stable" \
   VERSION="1.16.4" \
   GOPATH=/opt/go
 
