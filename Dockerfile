@@ -7,7 +7,8 @@ ENV \
   ALPINE_MIRROR="mirror1.hs-esslingen.de/pub/Mirrors" \
   ALPINE_VERSION="v3.6" \
   TERM=xterm \
-  BUILD_DATE="2017-08-29" \
+  BUILD_DATE="2017-10-05" \
+  BUILD_TYPE="git" \
   VERSION="1.16.4" \
   GOPATH=/opt/go
 
@@ -31,7 +32,6 @@ LABEL \
 RUN \
   echo "http://${ALPINE_MIRROR}/alpine/${ALPINE_VERSION}/main"       > /etc/apk/repositories && \
   echo "http://${ALPINE_MIRROR}/alpine/${ALPINE_VERSION}/community" >> /etc/apk/repositories && \
-  echo "http://${ALPINE_MIRROR}/alpine/edge/community"              >> /etc/apk/repositories && \
   apk --no-cache update && \
   apk --no-cache upgrade && \
   apk --no-cache add \
@@ -45,6 +45,13 @@ RUN \
   go get github.com/tools/godep && \
   go get github.com/aacebedo/dnsdock || true && \
   cd ${GOPATH}/src/github.com/aacebedo/dnsdock && \
+  #
+  # build stable packages
+  if [ "${BUILD_TYPE}" == "stable" ] ; then \
+    echo "switch to stable Tag v${VERSION}" && \
+    git checkout tags/v${VERSION} 2> /dev/null ; \
+  fi && \
+  #
   godep restore && \
   cd ${GOPATH}/src/github.com/aacebedo/dnsdock/src && \
   git describe --contains HEAD && \
